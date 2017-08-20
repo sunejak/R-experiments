@@ -1,0 +1,85 @@
+# read a data file, and do some processing as basis
+#
+# set some initial parameters
+#
+myArgs[[4]] <- "./input.log"
+myArgs[[5]] <- "10000000"
+#
+# Read input
+#
+indat <- scan(myArgs[[4]], what=list("","","","","","","","","","","","","","","","",""), flush=TRUE);
+#
+# Split up the content
+#
+# Total invocation time
+totalTime <- as.numeric(indat[[2]]);
+summary(totalTime);
+# Connect time
+connectTime <- as.numeric(indat[[4]]);
+summary(connectTime);
+# DNS time
+dnsTime <- as.numeric(indat[[6]]);
+summary(dnsTime);
+# Statuscode 
+httpStatus <- as.integer(indat[[8]]);
+ok_calls <- length(which(httpStatus==200))
+failed_calls <- length(which(httpStatus!=200))
+Txt <- sprintf("%s , ok_calls: %d failed_calls: %d", Txt, ok_calls, failed_calls)
+# Calculate the transfer time 
+callTime <- totalTime - ( connectTime + dnsTime);
+summary(callTime);
+odd_calltime <- lenght(which(callTime < 0));
+summary(odd_calltime);
+# Get the time for the invocation
+minuteInput <- unlist(strsplit(indat[[9]], "Check=", fixed = TRUE))[c(FALSE,TRUE)];
+# Get the day of the invocation
+dayInput <- substr(indat[[12]], 7, 16);
+# Merge day and time
+sampleTime <- paste(dayInput, minuteInput);
+# Convert to time input 
+timeForSample <- strptime( sampleTime, "%Y_%m_%d %H_%M_%S");
+summary(timeForSample);
+typeof(timeForSample);
+# Get the free memory
+freeMem <- as.numeric(indat[[11]]);
+summary(freeMem);
+typeof(freeMem);
+# Scale it to fit the 0-500 range
+scaleValue <- as.integer(myArgs[[5]]);
+freeMem <- freeMem/scaleValue;
+# make a filtered version of the free memory
+f101 <- rep(1/51,51)
+filterMem <- filter(freeMem, f101, sides=2);
+# what server are we getting data from
+server <- as.integer(indat[[17]]);
+
+# create the derivative of freeMem
+
+len <- length(freeMem);
+len
+diffs <- diff(freeMem);
+summary(diffs);
+difftime <- as.double(diff(timeForSample));
+summary(difftime);
+
+deri <- diffs / difftime[1:len];
+
+summary(deri);
+length(deri);
+length(timeForSample);
+maxval <- 5.0;
+
+callTime100 <- callTime * 10.0 ;
+
+summary(callTime100);
+# create a time series for a day
+freeMemTs <- ts(freeMem, start=c(0,0), frequency=60);
+
+# look at the different parts
+freeMemDec <- decompose(freeMemTs);
+
+# do a Exponential smoothing state space model
+freeMemETS <- ets(freeMemTs);
+
+# do a forecast
+freeForecast <- forecast(freeMemTs, h=120)
