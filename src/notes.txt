@@ -2,8 +2,7 @@
 #
 # set some initial parameters
 #
-myArgs[[4]] <- "./input.log"
-myArgs[[5]] <- "10000000"
+myArgs <- c("","","","./input.log", "10000000");
 #
 # Read input
 #
