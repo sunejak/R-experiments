@@ -71,13 +71,17 @@ maxval <- 5.0;
 callTime100 <- callTime * 10.0 ;
 
 summary(callTime100);
-# create a time series for a day
+# create a time series for a day, choose frequency to 100th of the samples (frequency=(length(freeMem)/100)
 freeMemTs <- ts(freeMem, start=c(0,0), frequency=60);
 
 # look at the different parts
 freeMemDec <- decompose(freeMemTs);
+plot(freeMemDec)
+readline(prompt="Press [enter] to continue")
 
 # do a Exponential smoothing state space model
+require("forecast");
+freeMemTs <- ts(freeMem, start=c(0,0), frequency=24);
 freeMemETS <- ets(freeMemTs);
 
 # do a forecast
