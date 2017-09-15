@@ -27,7 +27,7 @@ Txt <- sprintf("%s , ok_calls: %d failed_calls: %d", Txt, ok_calls, failed_calls
 # Calculate the transfer time 
 callTime <- totalTime - ( connectTime + dnsTime);
 summary(callTime);
-odd_calltime <- lenght(which(callTime < 0));
+odd_calltime <- length(which(callTime < 0));
 summary(odd_calltime);
 # Get the time for the invocation
 minuteInput <- unlist(strsplit(indat[[9]], "Check=", fixed = TRUE))[c(FALSE,TRUE)];
