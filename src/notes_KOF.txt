@@ -2,7 +2,11 @@
 # Read and show a KOF file
 #
 input <- scan('./data_KOF.txt', what=list("","","","","",""), flush=TRUE);
-y<-input[[5]][-(1:2)]
-x<-input[[4]][-(1:2)]
+str(input)
+#
+# only interested in lines starting with "05"
+#
+y<-input[[5]][(input[[1]] == "05")]
+x<-input[[4]][(input[[1]] == "05")]
 plot(y,x)
 
