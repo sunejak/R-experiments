@@ -16,8 +16,12 @@ plot(fit2)
 plot(forecast(fit2,h=14))
 str(lynx)
 fit <- nnetar(window(lynx,end=1920), decay=0.5, maxit=1500)
-plot(forecast(fit,h=14))
-lines(lynx)
 plot(forecast(fit,h=25))
 lines(lynx)
 history()
+
+# generate sawtooth
+xsaw<-seq(0,10, length=100)
+ysaw<-xsaw%%1
+ts(ysaw, frequency=10)
+
