@@ -25,3 +25,19 @@ xsaw<-seq(0,10, length=100)
 ysaw<-xsaw%%1
 ts(ysaw, frequency=10)
 
+# generate with tuneN
+require('tuneN')
+values <- 1 - sawtooth(100) + 0.05 * sine(1000) + 0.03 * sine(1500)
+plot(ts(values@left[0:1500]))
+
+# example from https://www.otexts.org/fpp/9/3
+require('fpp')
+data(sunspotarea)
+fit <- nnetar(sunspotarea,lambda=0)
+plot(forecast(fit,h=20))
+
+# generate a saw tooth
+xsaw<-1-seq(0,1, length=10)
+xrep <- rep(xsaw, 10))
+fit <- nnetar(1 + xrep, lambda=0)
+plot(forecast(fit, h=20))
