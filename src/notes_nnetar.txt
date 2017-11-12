@@ -41,3 +41,7 @@ xsaw<-1-seq(0,1, length=10)
 xrep <- rep(xsaw, 10))
 fit <- nnetar(1 + xrep, lambda=0)
 plot(forecast(fit, h=20))
+
+# use real data
+mem <- scan("./data/ums_values.txt")
+plot(forecast((nnetar(mem[118:(length(mem))], lambda=0)), h=50))
