@@ -44,4 +44,7 @@ plot(forecast(fit, h=20))
 
 # use real data
 mem <- scan("./data/ums_values.txt")
+require('forecast')
+# 1060 samples give NNAR(5,3)
+# 1063 samples give NNAR(29,15)
 plot(forecast((nnetar(mem[118:(length(mem))], lambda=0)), h=50))
