@@ -1,0 +1,3 @@
+#
+# grep ums-vip.telenor.no/umsadm Conc_2017_11_11.log | cut -c 108-117 > ums_values.txt
+#
