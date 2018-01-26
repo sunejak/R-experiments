@@ -18,12 +18,26 @@ timeForSample <- strptime( sampleTime, "%Y_%m_%d %H_%M_%S");
 summary(timeForSample)
 
 df <- data.frame(timeForSample, freeMem);
+# show frequency of the data
 findfrequency(df);
 findfrequency(freeMem);
 
 # when did we run on instance 2
 timeForSample[indat[[17]] == '2']
 
+# show decompose
+dataset45 <- ts(freeMem, frequency=45);
+png("dataset45.png", width=1268, height=951);
+plot(decompose(dataset45));
+dev.off()
+
+dataset48 <- ts(df, frequency=48);
+png("dataset48.png", width=1268, height=951);
+plot(timeForSample, freeMem, col=grey(.5))
+grid()
+# symmetric filtering of 200 samples
+lines(timeForSample, filter(freeMem, rep(1/200, 200), sides=2), col="red")
+dev.off()
 
 
 iii <- ts(freeMem, frequency=1440, start=c(0,0))
