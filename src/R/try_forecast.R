@@ -39,6 +39,10 @@ grid()
 lines(timeForSample, filter(freeMem, rep(1/200, 200), sides=2), col="red")
 dev.off()
 
+auto.arima(dataset45)
+# Series: dataset45
+# ARIMA(5,1,5)(2,0,0)[45]
+
 
 iii <- ts(freeMem, frequency=1440, start=c(0,0))
 plot(decompose(iii, type="multiplicative"))
