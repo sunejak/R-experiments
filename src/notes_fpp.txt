@@ -11,3 +11,14 @@ panel.hist <- function(x, ...)
 }
 pairs(credit[,-(4:5)], diag.panel=panel.hist)
 
+# using own data
+
+df <- data.frame(totalTime, connectTime, dnsTime, freeMem, timeForSample)
+str(df)
+pairs(df, diag.panel=panel.hist)
+plot(totalTime)
+lines(totalTime)
+histogram(totalTime)
+histogram(dnsTime)
+histogram(connectTime)
+histogram(freeMem)
