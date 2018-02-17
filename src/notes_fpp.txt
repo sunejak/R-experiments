@@ -1,0 +1,24 @@
+require("fpp")
+str(credit)
+panel.hist <- function(x, ...)
+{
+    usr <- par("usr"); on.exit(par(usr))
+    par(usr = c(usr[1:2], 0, 1.5) )
+    h <- hist(x, plot = FALSE)
+    breaks <- h$breaks; nB <- length(breaks)
+    y <- h$counts; y <- y/max(y)
+    rect(breaks[-nB], 0, breaks[-1], y, col = "cyan", ...)
+}
+pairs(credit[,-(4:5)], diag.panel=panel.hist)
+
+# using own data
+
+df <- data.frame(totalTime, connectTime, dnsTime, freeMem, timeForSample)
+str(df)
+pairs(df, diag.panel=panel.hist)
+plot(totalTime)
+lines(totalTime)
+histogram(totalTime)
+histogram(dnsTime)
+histogram(connectTime)
+histogram(freeMem)

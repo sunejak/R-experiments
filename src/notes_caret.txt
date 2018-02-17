@@ -5,7 +5,7 @@ sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 51716619E084DAB9
 sudo apt-get update
 sudo apt-get install r-base r-base-dev
 #
-# install the recuired packages in R, using sudo R
+# install the required packages in R, using "sudo R"
 #
 install.packages("caret", dependencies = c("Depends", "Suggests"))
 install.packages("RANN")
