@@ -18,6 +18,8 @@ timeForSample <- strptime( sampleTime, "%Y_%m_%d %H_%M_%S");
 summary(timeForSample)
 
 df <- data.frame(timeForSample, freeMem);
+
+require("forecast");
 # show frequency of the data
 findfrequency(df);
 findfrequency(freeMem);
